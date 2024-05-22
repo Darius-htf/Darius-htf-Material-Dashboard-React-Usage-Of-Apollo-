@@ -43,11 +43,12 @@ function Dashboard() {
 
   // This section has some state issues. Will be solved in future developments
   const { loading, data, error } = useQuery(LOAD_CHARTS_DATA);
+  const [chartData, setChartData] = useState();
 
-  const { chartData, setChartData } = useState();
-
-  useLayoutEffect(() => {
-    if (data) setChartData(data.GetReportsChartsData);
+  useEffect(() => {
+    if (data) {
+      setChartData(data.GetReportsChartsData);
+    }
   }, [data]);
 
   return (

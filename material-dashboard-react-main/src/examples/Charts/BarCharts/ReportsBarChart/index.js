@@ -45,9 +45,29 @@ import configs from "examples/Charts/BarCharts/ReportsBarChart/configs";
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const ReportsBarChart = (props) => {
-  const { color, title, description, date, chart } = props; 
+  const { color, title, description, date, chart } = props;
+  const [labels, setLabels] = useState();
+  // const [label, setLabel] = useState();
 
-  // console.log("Chart: " , chart)
+  useEffect(() => {
+    if (chart) {
+      setLabels(chart);
+    }
+  }, [chart]);
+
+  useEffect(() => {
+    if (labels) {
+      console.log("Chart was fetched to the {barChartData}");
+      console.log("labels: " , labels)
+    }
+  }, [labels]);
+
+  // Necessary for configuration
+  // useEffect(() => {
+  //   if (label) {
+  //     console.log("label: " , label)
+  //   }
+  // } , [label])
 
   return (
     <Card sx={{ height: "100%" }}>
@@ -64,14 +84,10 @@ const ReportsBarChart = (props) => {
               mt={-5}
               height="12.5rem"
             >
-              {/* <Bar
-                data={DataConfig && DataConfig.labels}
-                options={DataConfig && DataConfig.options}
-                redraw
-              /> */}
+              <Bar data={labels} redraw />
             </MDBox>
           ),
-          [color , chart] // Put the chart back inside
+          [color, chart]
         )}
         <MDBox pt={3} pb={1} px={1}>
           <MDTypography variant="h6" textTransform="capitalize">

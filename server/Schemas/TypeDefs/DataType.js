@@ -9,11 +9,4 @@ const LabelType = new GraphQLObjectType({
   }),
 });
 
-const LabelsType = new GraphQLObjectType({
-  name: "Labels",
-  fields: () => ({
-    labels: { type: new GraphQLList(LabelType) },
-  }),
-});
-
-module.exports = LabelsType;
+module.exports = LabelType;
