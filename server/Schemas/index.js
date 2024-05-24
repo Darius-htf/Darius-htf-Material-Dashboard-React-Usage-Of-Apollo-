@@ -9,13 +9,13 @@ const {
 
 const chartsData = require("../barChartData.json");
 console.log(chartsData);
-const LabelType = require("./TypeDefs/DataType");
+const LabelsType = require("./TypeDefs/DataType");
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
     GetReportsChartsData: {
-      type: new GraphQLList(LabelType),
+      type: new GraphQLList(LabelsType),
       args: { id: { type: GraphQLInt } },
       resolve(parent, args) {
         return chartsData; // Return an array of BarChartData

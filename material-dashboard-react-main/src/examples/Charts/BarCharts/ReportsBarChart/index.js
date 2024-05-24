@@ -46,28 +46,33 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 const ReportsBarChart = (props) => {
   const { color, title, description, date, chart } = props;
-  const [labels, setLabels] = useState();
-  // const [label, setLabel] = useState();
+  const [barChart, setBarChart] = useState();
+  const [barData, setBarData] = useState();
 
   useEffect(() => {
     if (chart) {
-      setLabels(chart);
+      setBarChart(chart[0]);
     }
   }, [chart]);
 
   useEffect(() => {
-    if (labels) {
-      console.log("Chart was fetched to the {barChartData}");
-      console.log("labels: " , labels)
-    }
-  }, [labels]);
+    if (barChart && barChart.labels) {
+      console.log("Chart was fetched to the {barChart}");
+      console.log("barChart: ", barChart);
+      console.log("barChart labels: ", barChart.labels);
 
-  // Necessary for configuration
-  // useEffect(() => {
-  //   if (label) {
-  //     console.log("label: " , label)
-  //   }
-  // } , [label])
+      if (barChart) {
+        var { data } = configs(barChart || []);
+        console.log("data: ", data);
+        setBarData(data);
+      }
+    }
+  }, [barChart]);
+
+  useEffect(() => {
+    if (barData) {
+    }
+  }, [barData]);
 
   return (
     <Card sx={{ height: "100%" }}>
@@ -84,7 +89,7 @@ const ReportsBarChart = (props) => {
               mt={-5}
               height="12.5rem"
             >
-              <Bar data={labels} redraw />
+              {barData && console.log("barData state: ", barData) && <Bar data={barData} redraw />}
             </MDBox>
           ),
           [color, chart]
@@ -102,7 +107,7 @@ const ReportsBarChart = (props) => {
               <Icon>schedule</Icon>
             </MDTypography>
             <MDTypography variant="button" color="text" fontWeight="light">
-              {/* {date} */}
+              {date}
             </MDTypography>
           </MDBox>
         </MDBox>

@@ -1,12 +1,10 @@
 const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLList, GraphQLInt, GraphQLString } = graphql;
 
-const LabelType = new GraphQLObjectType({
-  name: "Label",
+const LabelsType = new GraphQLObjectType({
+  name: "Labels",
   fields: () => ({
-    id: { type: GraphQLInt },
-    label: { type: GraphQLString },
+    labels: { type: new GraphQLList(GraphQLString) },
   }),
 });
-
-module.exports = LabelType;
+module.exports = LabelsType;

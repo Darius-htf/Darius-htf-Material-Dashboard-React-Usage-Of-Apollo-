@@ -1,9 +1,6 @@
 [
-  { "id": 1, "label": "M" },
-  { "id": 2, "label": "T" },
-  { "id": 3, "label": "W" },
-  { "id": 4, "label": "Th" },
-  { "id": 5, "label": "F" },
-  { "id": 6, "label": "Sa" },
-  { "id": 7, "label": "Su" }
+  {
+    "labels": ["MO", "TU", "WE", "TH", "FR", "SA", "SU"],
+    "datasets": { "label": "Sales", "data": [50, 20, 10, 22, 50, 10, 40] }
+  }
 ]
