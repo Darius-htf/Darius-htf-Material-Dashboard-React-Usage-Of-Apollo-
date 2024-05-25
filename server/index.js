@@ -15,6 +15,16 @@ app.use(
   })
 );
 
-app.listen(PORT, () => {
-  console.log("Server running");
+const startServer = () => {
+  app.listen(PORT, () => {
+    console.log("Server running");
+  });
+};
+
+startServer();
+
+// Watch for changes in the current file
+require('fs').watchFile(__filename, () => {
+  console.log('Server file changed, restarting...');
+  process.exit();
 });

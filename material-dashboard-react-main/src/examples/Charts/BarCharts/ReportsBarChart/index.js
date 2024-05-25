@@ -46,53 +46,49 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 const ReportsBarChart = (props) => {
   const { color, title, description, date, chart } = props;
-  const [barChart, setBarChart] = useState();
-  const [barData, setBarData] = useState();
+  const [data, setData] = useState();
+  const [options, setOptions] = useState();
 
   useEffect(() => {
-    if (chart) {
-      setBarChart(chart[0]);
+    if (chart && chart[0]) {
+      // console.log("Chart First Child: ", chart[0]);
+
+      const { data, options } = configs(chart[0].labels || [], chart[0].datasets || {});
+      setData(data);
+      setOptions(options);
     }
   }, [chart]);
 
   useEffect(() => {
-    if (barChart && barChart.labels) {
-      console.log("Chart was fetched to the {barChart}");
-      console.log("barChart: ", barChart);
-      console.log("barChart labels: ", barChart.labels);
-
-      if (barChart) {
-        var { data } = configs(barChart || []);
-        console.log("data: ", data);
-        setBarData(data);
-      }
+    if (data && options) {
+      // console.log("Data: ", data);
+      // console.log("Options: ", options);
     }
-  }, [barChart]);
+  }, [data, options]);
 
-  useEffect(() => {
-    if (barData) {
-    }
-  }, [barData]);
+  // const ObjectList = {
+  //   labels: ["M", "T", "W", "T", "F", "S", "S"],
+  //   datasets: { label: "Sales", data: [60, 60, 60, 60, 60, 60, 60] },
+  // };
+
+  // const { data, options } = configs(ObjectList.labels || [], ObjectList.datasets || {});
 
   return (
     <Card sx={{ height: "100%" }}>
       <MDBox padding="1rem">
-        {useMemo(
-          () => (
-            <MDBox
-              variant="gradient"
-              bgColor={color}
-              borderRadius="lg"
-              coloredShadow={color}
-              py={2}
-              pr={0.5}
-              mt={-5}
-              height="12.5rem"
-            >
-              {barData && console.log("barData state: ", barData) && <Bar data={barData} redraw />}
-            </MDBox>
-          ),
-          [color, chart]
+        {data && options && (
+          <MDBox
+            variant="gradient"
+            bgColor={color}
+            borderRadius="lg"
+            coloredShadow={color}
+            py={2}
+            pr={0.5}
+            mt={-5}
+            height="12.5rem"
+          >
+            <Bar data={data} options={options} redraw />
+          </MDBox>
         )}
         <MDBox pt={3} pb={1} px={1}>
           <MDTypography variant="h6" textTransform="capitalize">

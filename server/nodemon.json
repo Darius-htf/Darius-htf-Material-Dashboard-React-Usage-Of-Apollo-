@@ -1,0 +1,5 @@
+{
+  "watch": ["barChartData.json"],
+  "ext": "json",
+  "exec": "node index.js"
+}

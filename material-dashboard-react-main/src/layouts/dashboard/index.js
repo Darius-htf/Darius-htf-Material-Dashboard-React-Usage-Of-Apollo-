@@ -30,6 +30,7 @@ import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatist
 // Data
 // import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
 import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
+import reportsBarChartData from "./data/reportsBarChartData";
 
 // Dashboard components
 import Projects from "layouts/dashboard/components/Projects";
@@ -47,6 +48,7 @@ function Dashboard() {
 
   useEffect(() => {
     if (data) {
+      // console.log("Dashboard Data: " , data);
       setChartData(data.GetReportsChartsData);
     }
   }, [data]);
@@ -120,13 +122,15 @@ function Dashboard() {
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={4}>
               <MDBox mb={3}>
-                <ReportsBarChart
-                  color="info"
-                  title="website views"
-                  description="Last Campaign Performance"
-                  date="campaign sent 2 days ago"
-                  chart={chartData && chartData}
-                />
+                {chartData && (
+                  <ReportsBarChart
+                    color="info"
+                    title="website views"
+                    description="Last Campaign Performance"
+                    date="campaign sent 2 days ago"
+                    chart={chartData}
+                  />
+                )}
               </MDBox>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>

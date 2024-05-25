@@ -8,22 +8,20 @@ const {
 } = graphql;
 
 const chartsData = require("../barChartData.json");
-console.log(chartsData);
-const LabelsType = require("./TypeDefs/DataType");
+const ChartType = require("./TypeDefs/DataType");
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
     GetReportsChartsData: {
-      type: new GraphQLList(LabelsType),
-      args: { id: { type: GraphQLInt } },
+      type: new GraphQLList(ChartType),
       resolve(parent, args) {
-        return chartsData; // Return an array of BarChartData
+        return chartsData;
       },
     },
   },
 });
 
 module.exports = new GraphQLSchema({
-  query: RootQuery
+  query: RootQuery,
 });
